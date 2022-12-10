@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-initdb-config
+data:
+  init.sql: |
+    create table customers(customer_id int, 
+                           customer_name varchar(255),
+                           lat NUMERIC, 
+                           lon NUMERIC,
+                           geohash VARCHAR(12));

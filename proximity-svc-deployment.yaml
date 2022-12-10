@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proximity-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: proximity-svc
+  template:
+    metadata:
+      labels:
+        app: proximity-svc
+    spec:
+      containers:
+        - name: proximity-svc
+          image: proximity:1.99
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: changeme
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql:5432/northwind?useSSL=false
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              value: update
